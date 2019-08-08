@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"  ?>
+<!-- http://blogs.microsoft.co.il/blogs/gilf/archive/2009/03/10/enabling-xml-schema-validation-in-visual-studio.aspx -->
+<!-- NOTE Not including the xmlns attribte in root seems to work (?) -->
+<Pensions>
+
+  <Pension ID="1" PayrollID="1" SchemeName="Test Scheme">
+    <Elements>
+      <Employees>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employees>
+      <Employers>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employers>
+      <AVC>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </AVC>
+    </Elements>
+  </Pension>
+  
+  <Pension ID="2" PayrollID="1" SchemeName="My Name" />
+</Pensions>

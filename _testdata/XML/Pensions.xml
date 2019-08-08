@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"  ?>
+<Pensions>
+  <Pension ID="" PayrollID="" SchemeName="">
+    <Elements>
+      <Employees>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employees>
+      <Employers>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employers>
+      <AVC>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </AVC>
+    </Elements>
+  </Pension>
+  <Pension ID="" PayrollID="" SchemeName="">
+    <Elements>
+      <Employees>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employees>
+      <Employers>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </Employers>
+      <AVC>
+        <Bands>
+          <Band Type="1"></Band>
+          <Band Type="2"></Band>
+        </Bands>
+        <DefaultValues>
+          <DefaultValue Type="1"></DefaultValue>
+          <DefaultValue Type="2"></DefaultValue>
+        </DefaultValues>
+      </AVC>
+    </Elements>
+  </Pension>
+  <Pension ID="" PayrollID="" SchemeName="" />
+</Pensions>
