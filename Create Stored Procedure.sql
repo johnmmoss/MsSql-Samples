@@ -103,3 +103,16 @@ GO
 -- EXEC usp_AddWidget 'New Widget', 'My new Widget', '100'
 -- EXEC usp_AddWidget @NAME = 'New Widget', @DESCRIPTION = 'My new Widget'
 -- EXEC usp_AddWidget @NAME = 'New Widget', @DESCRIPTION = 'My new Widget', @CATEGORY = '101'
+
+------------------------------------
+-- CREATE USER/LOGIN
+------------------------------------
+IF NOT EXISTS(SELECT * FROM sys.sysusers where name = 'RecurlyListenerUser' ) 
+	AND EXISTS (SELECT 1 FROM master.sys.server_principals WHERE NAME = 'RecurlyListenerUser' )   
+BEGIN        
+	CREATE LOGIN [FOUser] WITH PASSWORD = 'Password1!', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+	ALTER SERVER ROLE  sysadmin  ADD MEMBER FOUser
+
+	CREATE USER [FOUser] FROM LOGIN [FOUser]  
+	ALTER ROLE db_owner ADD MEMBER FOUser;  
+END  
