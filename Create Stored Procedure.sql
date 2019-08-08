@@ -1,69 +1,105 @@
 
--- CREATE TABLE (Transact-SQL)
--- http://msdn.microsoft.com/en-us/library/ms174979.aspx
+---------------------------------
+-- CREATE DATABASE: WidgetWorks
+---------------------------------
 
-/*
- * Create a database
-*/
-
-CREATE DATABASE Blog
-GO
-USE Blog
+CREATE DATABASE WidgetWorks
 GO
 
-/*
- * Add some tables
-*/
-
-CREATE TABLE Category
-(
-	CategoryID INT IDENTITY not null PRIMARY KEY,
-	Title NVARCHAR(50) not null,
-	[Description] NVARCHAR(500)
-)
+USE [WidgetWorks]
 GO
 
-CREATE TABLE Post
-(
-	PostID int identity not null PRIMARY KEY,
-	CategoryID int not null REFERENCES Category (CategoryID),	
-	Title nvarchar(50),
-	[Text] nvarchar(500)
-)
-GO
+---------------------------------
+-- CREATE TABLE: Widgets
+---------------------------------
 
-CREATE TABLE Comment
-(
-	CommentID INT IDENTITY NOT NULL PRIMARY KEY,
-	ParentID INT REFERENCES Comment (CommentID),
-	PostID INT NOT NULL,
-	Name VARCHAR(50) NOT NULL,
-	EmailAddress varchar(200) NOT NULL,
-	[Text] VARCHAR(500) NOT NULL			
-)
-GO
+--IF (EXISTS (SELECT TOP 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  = 'Widgets'))
+--BEGIN
+--	DROP TABLE Widgets
+--END
 
-/*
- * Populate tables with some data
-*/
+IF NOT (EXISTS (SELECT TOP 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  = 'Widgets'))
+	BEGIN
+		CREATE TABLE [dbo].[Widgets](
+			[Id] [int] IDENTITY(1,1) NOT NULL,
+			[Name] [varchar](50) NULL,
+			[Description] [varchar](50) NULL,
+			[Category] [int] NULL,
+		 CONSTRAINT [PK_Widgets] PRIMARY KEY CLUSTERED 
+		(
+			[Id] ASC
+		)) ON [PRIMARY]
+	
+	END
+ELSE
+	BEGIN
+        print ('Table Widgets already exists. No action taken!')        
+    END
 
-INSERT INTO Category (Title, [Description])	
+-- TRUNCATE TABLE [dbo].[Widgets]
+SELECT *
+FROM [dbo].[Widgets]
+
+---------------------------------
+-- INSERT INTO: Widgets
+---------------------------------
+INSERT INTO 
+	[dbo].[Widgets] (Name, Description, Category) 
 VALUES 
-('Sports News', 'Updates and latest news from football to curling'),
-('Gardening', 'Learn how to tend your garden'),
-('Begginners cookery', 'Getting started with cookery, its not as hard as you think.')
+	('Widget 1', 'My first widget', 1) ,
+	('Widget 2', 'My second widget', 2) ,
+	('Widget 3', 'My first widget', 3) 
 GO
 
-INSERT INTO Post (CategoryID, Title, [Text])
-VALUES
-(1, 'Spurs sign Ronaldo', 'Spurs made an excellent signing today with Real Madrids star striker moving to the lane'),
-(1, 'Arsenal manager bows out', 'Arsene Wenger finally throws in the towel after Arsenals appaling run of 23 games without a win')
+------------------------------------
+-- CREATE PROCEDURE: usp_GetAllWidgets
+------------------------------------
+IF OBJECT_ID('usp_GetAllWidgets', 'P') IS NOT NULL
+BEGIN	
+	DROP PROCEDURE usp_GetAllWidgets	
+END
 GO
-
-CREATE PROCEDURE GetBlog AS
-	SELECT * FROM Post
+CREATE PROCEDURE usp_GetAllWidgets	
+AS
+	SELECT * FROM Widgets	
 GO
+-- EXEC usp_GetAllWidgets
 
+----------------------------------------
+-- CREATE PROCEDURE: usp_GetWidgetsByCategory
+----------------------------------------
+IF OBJECT_ID('usp_GetWidgetsByCategory', 'P') IS NOT NULL
+BEGIN	
+	DROP PROCEDURE usp_GetWidgetsByCategory
+END
+GO
+CREATE PROCEDURE usp_GetWidgetsByCategory
+	@Category INT
+AS
+	SELECT * FROM Widgets
+	where Category = @Category
+GO
+-- EXEC usp_GetWidgetsByCategory 2
 
-select * from Category
-select * from Post
+------------------------------------
+-- CREATE PROCEDURE: usp_AddWidget
+------------------------------------
+IF OBJECT_ID('usp_AddWidget', 'P') IS NOT NULL
+BEGIN	
+	DROP PROCEDURE usp_AddWidget
+END
+GO
+CREATE PROCEDURE usp_AddWidget
+	@NAME VARCHAR(50),
+	@DESCRIPTION VARCHAR(50),
+	@CATEGORY INT = 33
+AS
+	INSERT INTO 
+	[dbo].[Widgets] (Name, Description, Category) 
+VALUES 
+	(@NAME, @DESCRIPTION, @CATEGORY)
+GO
+-- EXEC usp_AddWidget 'New Widget', 'My new Widget'
+-- EXEC usp_AddWidget 'New Widget', 'My new Widget', '100'
+-- EXEC usp_AddWidget @NAME = 'New Widget', @DESCRIPTION = 'My new Widget'
+-- EXEC usp_AddWidget @NAME = 'New Widget', @DESCRIPTION = 'My new Widget', @CATEGORY = '101'
