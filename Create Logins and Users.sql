@@ -26,4 +26,12 @@ BEGIN
 	ALTER ROLE db_owner ADD MEMBER FOUser;  
 END  
 
+-- Add execute to an SP
+GRANT EXECUTE ON get_product_costs TO [RecurlyListenerUser] 
+GRANT EXECUTE ON [dbo].[BookingInvoicePay] TO [RecurlyListenerUser]
+
+-- Add select to tables
+GRANT SELECT ON dbo.contacts TO RecurlyListenerUser;
+GRANT SELECT ON dbo.products TO RecurlyListenerUser;
+
 

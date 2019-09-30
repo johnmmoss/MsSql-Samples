@@ -94,7 +94,8 @@ CREATE PROCEDURE usp_AddWidget
 	@DESCRIPTION VARCHAR(50),
 	@CATEGORY INT = 33
 AS
-	INSERT INTO 
+
+INSERT INTO 
 	[dbo].[Widgets] (Name, Description, Category) 
 VALUES 
 	(@NAME, @DESCRIPTION, @CATEGORY)
@@ -107,8 +108,8 @@ GO
 ------------------------------------
 -- CREATE USER/LOGIN
 ------------------------------------
-IF NOT EXISTS(SELECT * FROM sys.sysusers where name = 'RecurlyListenerUser' ) 
-	AND EXISTS (SELECT 1 FROM master.sys.server_principals WHERE NAME = 'RecurlyListenerUser' )   
+IF NOT EXISTS(SELECT * FROM sys.sysusers where name = 'FOUser' ) 
+	AND EXISTS (SELECT 1 FROM master.sys.server_principals WHERE NAME = 'FOUser' )   
 BEGIN        
 	CREATE LOGIN [FOUser] WITH PASSWORD = 'Password1!', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 	ALTER SERVER ROLE  sysadmin  ADD MEMBER FOUser
